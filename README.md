@@ -81,6 +81,6 @@ func checkConflicts(currentCourses: [Course], newCourse: Course) -> Bool {
 ---
 
 ## 👥 團隊成員
-*   資工3 劉李陽
-*   資工4 吳柏承
-*   農藝3 沈育亘
+*   電資3 劉李陽
+*   資工3 王彥翔
+*   資工3 許唐豪
