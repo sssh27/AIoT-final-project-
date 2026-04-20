@@ -1,0 +1,18 @@
+# 忽略 Python 腳本與虛擬環境
+*.py
+__pycache__/
+
+# 忽略大型原始簡報與暫存簡報
+source.pptx
+check_target.pptx
+Frank_oral_defense_0725_v7.pptx
+Smart_City_Drone_Law_Enforcement.pdf
+
+# 忽略文字提取暫存檔
+*.txt
+
+# 排除 README 與簡報
+!README.md
+!初興_proposal.pptx
+!implementation_plan.md
+!.gitignore
