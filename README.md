@@ -1,86 +1,73 @@
 # 初興 (NCHU All-in-One) — 智慧校園一站式整合系統
 
-![NCHU Badge](https://img.shields.io/badge/University-NCHU-green)
-![Tech Stack](https://img.shields.io/badge/Platform-iOS-blue)
-![Architecture](https://img.shields.io/badge/Architecture-MVVM-orange)
+![Hero Image](./assets/page_1.png)
 
-## 📋 專案摘要 (Abstract)
-
-*   **A (Attention Getter / Motivation)**：儘管智慧型手機普及，但中興大學學生在校園生活中仍面臨多個系統碎片化、導航資訊不精確及選課排程效率低下的問題。
-*   **B (But / Challenge)**：現有校園系統介面陳舊且功能分散，缺乏專為行動端設計、具備情境感知功能的智慧助理。
-*   **C (Cure / Solution)**：本專案提出名為「初興」的 iOS 應用程式，旨在透過一站式整合，打破資訊孤島，提升校園生活效率。
-*   **D (Development)**：本系統採用 SwiftUI 與 MVVM 平行開發架構，並導入 O(n²) 衝堂偵測演算法與基於 Set 交集的通識課程推薦邏輯。
-*   **E (Experiments)**：透過系統模擬與效能評估，驗證演算法在處理上千門課程資料時，能達到毫秒級反應且維持 0% 衝堂率。
-*   **F (Findings)**：初步邏輯驗證顯示，「初興」能顯著減少分頁切換頻率，並顯著提升學生對校園特約醫療及通識課程的檢索效率。
+[![University - NCHU](https://img.shields.io/badge/University-NCHU-green)](https://www.nchu.edu.tw)
+[![Platform - iOS](https://img.shields.io/badge/Platform-iOS%2015%2B-blue)](https://developer.apple.com/ios/)
+[![Architecture - MVVM](https://img.shields.io/badge/Architecture-MVVM-orange)](./docs/system_design_specification.md)
+[![Status - Complete](https://img.shields.io/badge/Status-Complete-brightgreen)](#)
 
 ---
 
-## 1. 引言 (Introduction / A to F Logic)
-
-### 動機與背景 (A)
-中興大學學生每天需要處理包括 iLearning 課程、圖書館預約、及校園入口登錄等多項數位事務。然而，這些服務目前皆為獨立網頁，缺乏一個統一的行動化入口。
-
-### 問題與挑戰 (B)
-*   **資訊碎片化**：不同服務需多次登入，切換成本高。
-*   **選課痛點**：無法直觀找出空堂時段可選的課程。
-*   **導航障礙**：一般地圖與校園大樓代號（如 AT, AG）不兼容。
-
-### 解決方案 (C)
-「初興」App 提供了一個智慧核心，預整合所有核心 API，確保使用者在單一 App 內即可完成 90% 的校園事務處理。
+## 🌟 專案願景 (Vision)
+「初興」旨在打破中興大學目前碎片化的數位服務現況，透過 **All-in-One 原生 iOS 應用程式**，將原本孤立的網頁服務（iLearning、入口網站、圖書館）整合為具備情境感知能力的智慧助手，消除學生的「切換摩擦」。
 
 ---
 
-## 2. 相關研究 (Related Work / NotebookLM Analysis)
+## 🚀 核心功能與成果演示
 
-透過 **NotebookLM** 對智慧校園架構進行文獻分析，我們得出以下結論：
-*   **現有系統比較**：傳統 Web-wrapper 類型的 App 缺乏本地端資料處理能力，導致 UI 反應遲鈍。
-*   **差異化優勢**：相較於現有 NCHU Portal，「初興」導入了本地端演算法（衝堂偵測）以及針對 NCHU 特約診所優化的地理圖標。
-*   **情境感知設計**：引用當前回應式系統理論，「初興」設計了主動提醒功能（下一堂課位置），將被動查詢提升為主動推送。
+![Solution Overview](./assets/page_5.png)
 
----
+### 1. 智慧一站式整合 (All-in-One Dashboard)
+- **單一入口**：整合 iLearning、課程查詢、校園地圖於一體。
+- **Session 持久化**：內嵌 WebView 確保登入狀態同步，無須反覆登入。
 
-## 3. 提案設計 (Proposed Design / 規格書)
+### 2. 智慧排課助手 (Smart Schedule Assistant)
+- **自動衝堂偵測**：即時攔截時間衝突課程。
+- **空堂通識推薦**：自動篩選使用者空堂時段內的所有通識課程。
 
-### 系統規格
-*   **操作系統**：iOS 15.0 或以上。
-*   **核心功能模組**：
-    1.  **智慧課表**：支援動態網格編輯與自動顏色映射。
-    2.  **校園地圖**：大樓代號關鍵字搜尋與一鍵導航。
-    3.  **生活助手**：特約診所地圖、自學空間 WebView 嵌入。
-*   **使用者介面**：採用「中興鴨」主題化設計，支援 Dark Mode 與外觀自訂。
+### 3. 校園地圖與生活導航 (Campus Navigation)
+- **大樓代碼搜尋**：支援 NCHU 特有大樓代號（如 AT, AG）關鍵字檢索。
+- **特約醫療地圖**：精確標註校園特約診所，解決資訊不對等問題。
 
----
-
-## 4. 詳細實作 (Detail Implementation)
-
-### 技術架構
-*   **MVVM 架構**：解耦 UI 與邏輯，確保程式碼的可維護性。
-*   **資料模型 (Models)**：定義課程與用戶數據之 JSON 結構。
-
-### 核心演算法
-#### 衝堂偵測 (Conflict Detection)
-```swift
-// 衝堂偵測邏輯示例
-func checkConflicts(currentCourses: [Course], newCourse: Course) -> Bool {
-    return currentCourses.allSatisfy { $0.periods.isDisjoint(with: newCourse.periods) }
-}
-```
-系統利用 `Set` 的 `isDisjoint` 操作，在選課或手動編輯時即時攔截時間衝突。
+![Main Structure](./assets/page_14.png)
+![High-Fidelity Mockups](./assets/page_47.png)
 
 ---
 
-## 5. 結論 (Conclusion)
+## 🛠️ 技術實作 (Technical Implementation)
 
-### 預期發現
-我們的設計證明了單一入口在提升學生生活效率上的潛力。未來開發方向將專注於更精確的室內導航與全校資源的 API 即時對接。
+### 系統架構
+本專案採用 **MVVM (Model-View-ViewModel)** 設計模式與 **SwiftUI** 框架，確保 UI 狀態與業務邏輯清晰解耦。
 
-### 專案資源
-*   **簡報連結**：[初興_proposal.pptx](./初興_proposal.pptx)
-*   **展示影片**：[YouTube 連結](https://youtu.be/5bYZXAhFniQ)
+![System Architecture](./assets/page_7.png)
+
+### 關鍵演算法：衝堂偵測 (Conflict Detection)
+系統利用 `Set` 的 `isDisjoint` 操作，在選課或手動編輯時即時攔截時間衝突，達到毫秒級反應速度。
+
+![Algorithm Logic](./assets/page_30.png)
+
+---
+
+## 📚 相關研究與文獻引註 (Related Work)
+
+本專案參考以下智慧校園行動平台之學術研究，以強化人機協作效率與系統整合度：
+
+1.  **Dong, Z., et al. (2016)**. *"OnCampus: a mobile platform towards a smart campus."* — 本研究強調了減少資訊過載與提供個性化服務對於提升學生參與度的重要性。
+2.  **Madyatmadja, R. M., et al. (2021)**. *"A Review on Smart Campus Concept and Application."* — 詳細探討了物聯網 (IoT) 整合與移動應用對校園運作效率的正面影響。
+3.  **Zhang, Y., et al. (2022)**. *"Human-centric smart campus design."* — 提供理應以解決核心持分者（學生）問題為目標的技術設計理論框架。
+
+---
+
+## 📂 專案文檔與連結
+- **[📘 技術設計規格書 (TDS)](./docs/system_design_specification.md)**：詳細的系統模型、資料流與演算法說明。
+- **[💬 AI 協作對話紀錄 (Chat Log)](./docs/chat_log.md)**：記錄人機協作開發 MVVM 架構與邏輯決策的過程。
+- **[🎬 專案介紹影片](https://youtu.be/5bYZXAhFniQ)**：完整功能展示與設計理念說明。
+- **[📊 原始提案簡報](./初興_proposal.pptx)**：AIoT 課程提案 PPT。
 
 ---
 
 ## 👥 團隊成員
-*   電資3 劉李陽
-*   資工3 王彥翔
-*   資工3 許唐豪
+*   **電資3 劉李陽**
+*   **資工3 王彥翔**
+*   **資工3 許唐豪**
