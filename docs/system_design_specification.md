@@ -108,3 +108,13 @@ graph TD
 - **空間容量感測**：圖書館與自習室即時人數監測。
 
 透過結合複雜的排表演算法與極簡的原生介面，「初興」將成為中興大學學生無縫連結校園生活不可或缺的智慧助理。
+
+---
+
+## 7. 相關研究與文獻引註 (Related Work)
+
+本平台之設計參考以下學術研究，以強化系統之實用性與學術基礎：
+
+1.  **Dong, Z., et al. (2016)**. *"OnCampus: a mobile platform towards a smart campus."* — 強調減少資訊過載與個性化服務對提升學生效率的重要性。
+2.  **Madyatmadja, R. M., et al. (2021)**. *"A Review on Smart Campus Concept and Application."* — 探討 IoT 整合與行動應用對校園運作效率的正面影響。
+3.  **Zhang, Y., et al. (2022)**. *"Human-centric smart campus design."* — 提供以解決持分者問題為目標的技術設計框架。
